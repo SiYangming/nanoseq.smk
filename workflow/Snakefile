@@ -1,5 +1,6 @@
 configfile: "config/config.yaml"
 
+
 include: "rules/common.smk"
 include: "rules/qc.smk"
 include: "rules/dorado.smk"
@@ -11,16 +12,20 @@ include: "rules/quant.smk"
 include: "rules/diffexp.smk"
 include: "rules/polya.smk"
 
+
 onstart:
     print("\n--- NanoSeq Direct RNA-seq started ---\n")
+
 
 onsuccess:
     print("\n--- Workflow finished! ---\n")
 
+
 onerror:
     print("\n--- An error occurred! ---\n")
+
 
 rule all:
     default_target: True
     input:
-        pipeline_targets()
+        pipeline_targets(),

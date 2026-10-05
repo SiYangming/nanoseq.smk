@@ -45,7 +45,9 @@ def raw_reads(wildcards):
         return f"results/dorado/{wildcards.sample}/{wildcards.sample}.fastq"
     reads = sample_reads(wildcards.sample)
     if not reads:
-        raise ValueError(f"fastq entrypoint requires a reads column for {wildcards.sample}")
+        raise ValueError(
+            f"fastq entrypoint requires a reads column for {wildcards.sample}"
+        )
     return reads
 
 
@@ -62,7 +64,9 @@ def aligned_bam(wildcards):
     if ENTRY == "bam":
         bam = sample_bam_sheet(wildcards.sample)
         if not bam:
-            raise ValueError(f"bam entrypoint requires a bam column for {wildcards.sample}")
+            raise ValueError(
+                f"bam entrypoint requires a bam column for {wildcards.sample}"
+            )
         return bam
     return f"results/minimap2/{wildcards.sample}/{wildcards.sample}.bam"
 
