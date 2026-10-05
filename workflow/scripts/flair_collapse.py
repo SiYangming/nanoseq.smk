@@ -44,7 +44,9 @@ for name in ("trust_ends", "remove_internal_priming", "stringent", "check_splice
     if snakemake.params.get(name, True):
         cmd += f" --{name}"
 
-cmd += f' --mm2_args "{snakemake.params.mm2_args}"'
+mm2_args = str(snakemake.params.get("mm2_args") or "").strip()
+if mm2_args:
+    cmd += f" --mm2_args={mm2_args}"
 
 extra = snakemake.params.get("extra", "")
 if extra:
