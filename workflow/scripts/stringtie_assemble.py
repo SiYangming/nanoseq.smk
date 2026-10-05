@@ -1,0 +1,27 @@
+"""stringtie assemble (bioskills modules/stringtie)."""
+
+from __future__ import annotations
+
+import os
+import sys
+
+from snakemake.shell import shell
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import docker_wrapper  # noqa: E402
+
+log = snakemake.log_fmt_shell(stdout=True, stderr=True)
+docker_prefix, tool_bin = docker_wrapper.docker_wrapper_binary(
+    snakemake.config,
+    "stringtie",
+    "stringtie_bin",
+    "stringtie",
+)
+
+out = str(snakemake.output.gtf)
+shell(f"mkdir -p {os.path.dirname(out)}")
+shell(
+    f"{docker_prefix}{tool_bin} {snakemake.input.bam} {snakemake.params.flags} "
+    f"{snakemake.params.gtf_arg} -o {out} -l {snakemake.params.label} "
+    f"-m {snakemake.params.min_len} -p {snakemake.threads} {snakemake.params.extra} {log}"
+)

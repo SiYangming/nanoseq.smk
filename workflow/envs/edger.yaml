@@ -1,0 +1,8 @@
+name: edger
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - bioconda::bioconductor-edger
+  - r-base

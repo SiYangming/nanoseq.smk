@@ -1,0 +1,33 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+type: object
+description: Direct RNA-seq workflow configuration
+properties:
+  exec_mode:
+    type: string
+    enum: [native, conda, docker, apptainer]
+  sample_sheet:
+    type: string
+  entrypoint:
+    type: string
+    enum: [pod5, fastq, bam]
+  threads:
+    type: integer
+    minimum: 1
+  min_qscore:
+    type: integer
+    minimum: 0
+  fasta:
+    type: string
+  gtf:
+    type: string
+  run_polya:
+    type: boolean
+  run_edger:
+    type: boolean
+additionalProperties: true
+required:
+  - exec_mode
+  - sample_sheet
+  - entrypoint
+  - fasta
+  - gtf

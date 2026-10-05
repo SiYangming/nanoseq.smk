@@ -1,0 +1,87 @@
+exec_mode: conda
+sample_sheet: config/samples.tsv
+entrypoint: fastq
+threads: 2
+min_qscore: 10
+fasta: resources/tiny.fa
+gtf: resources/tiny.gtf
+run_polya: false
+run_edger: true
+
+dorado:
+  model: rna004_130bps_sup@v5.1.0
+  extra_params: "--estimate-poly-a"
+  dorado_bin: dorado
+  docker_image: docker.1ms.run/nanoporetech/dorado:latest
+  apptainer_image: ""
+
+seqkit:
+  seqkit_bin: seqkit
+  docker_image: quay.io/biocontainers/seqkit:2.10.1--h9ee0642_0
+  apptainer_image: ""
+
+minimap2:
+  args: "-ax splice -uf -k14"
+  cigar_bam: false
+  minimap2_bin: minimap2
+  samtools_bin: samtools
+  docker_image: ""
+  apptainer_image: ""
+
+flair:
+  flair_bin: flair
+  bedtools_bin: bedtools
+  identify_gene_isoform_bin: identify_gene_isoform
+  min_support: 1
+  end_window: 100
+  intpriming_threshold: 30
+  trust_ends: true
+  remove_internal_priming: false
+  stringent: false
+  check_splice: false
+  quiet: true
+  mm2_args: "--MD"
+  collapse_extra: ""
+  docker_image: ""
+  apptainer_image: ""
+
+stringtie:
+  stringtie_bin: stringtie
+  min_transcript_len: 50
+  merge_label: MSTRG
+  extra_args: ""
+  docker_image: ""
+  apptainer_image: ""
+
+gffcompare:
+  gffcompare_bin: gffcompare
+  extra_args: "-R -C -K -M"
+  docker_image: ""
+  apptainer_image: ""
+
+gffread:
+  gffread_bin: gffread
+  docker_image: ""
+  apptainer_image: ""
+
+salmon:
+  salmon_bin: salmon
+  libtype: A
+  kmer: 13
+  extra_args: ""
+  docker_image: ""
+  apptainer_image: ""
+
+edger:
+  pair: "A,B"
+  cpm_cutoff: 0
+  min_samples: 1
+  adjust: BH
+  docker_image: ""
+  apptainer_image: ""
+
+quantifypolya:
+  max_gapwidth: 24
+  quant_mode: canonical
+  docker_image: ""
+  apptainer_image: ""

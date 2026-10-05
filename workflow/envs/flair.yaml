@@ -1,0 +1,9 @@
+name: flair
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - bioconda::flair==2.0.0
+  - bioconda::minimap2==2.30
+  - bioconda::bedtools>=2.31.1

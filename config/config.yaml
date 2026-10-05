@@ -1,0 +1,87 @@
+exec_mode: conda
+sample_sheet: config/samples.tsv
+entrypoint: fastq
+threads: 8
+min_qscore: 10
+fasta: genome.fa
+gtf: annotation.gtf
+run_polya: false
+run_edger: true
+
+dorado:
+  model: rna004_130bps_sup@v5.1.0
+  extra_params: "--estimate-poly-a"
+  dorado_bin: dorado
+  docker_image: docker.1ms.run/nanoporetech/dorado:latest
+  apptainer_image: ""
+
+seqkit:
+  seqkit_bin: seqkit
+  docker_image: quay.io/biocontainers/seqkit:2.10.1--h9ee0642_0
+  apptainer_image: ""
+
+minimap2:
+  args: "-ax splice -uf -k14"
+  cigar_bam: false
+  minimap2_bin: minimap2
+  samtools_bin: samtools
+  docker_image: quay.io/biocontainers/mulled-v2-665a70720405ceca575065917ab55edf:7ac0bc24f1b9cc303f2404aa368475ff8a2aa000-0
+  apptainer_image: ""
+
+flair:
+  flair_bin: flair
+  bedtools_bin: bedtools
+  identify_gene_isoform_bin: identify_gene_isoform
+  min_support: 3
+  end_window: 100
+  intpriming_threshold: 30
+  trust_ends: true
+  remove_internal_priming: true
+  stringent: true
+  check_splice: true
+  quiet: true
+  mm2_args: "-I8g,--MD"
+  collapse_extra: ""
+  docker_image: quay.io/biocontainers/flair:2.0.0--pyhdfd78af_1
+  apptainer_image: ""
+
+stringtie:
+  stringtie_bin: stringtie
+  min_transcript_len: 200
+  merge_label: MSTRG
+  extra_args: ""
+  docker_image: quay.io/biocontainers/stringtie:3.0.3--h29c0135_0
+  apptainer_image: ""
+
+gffcompare:
+  gffcompare_bin: gffcompare
+  extra_args: "-R -C -K -M"
+  docker_image: quay.io/biocontainers/gffcompare:0.12.6--h9f5acd7_0
+  apptainer_image: ""
+
+gffread:
+  gffread_bin: gffread
+  docker_image: quay.io/biocontainers/gffread:0.12.7--h4ac6f70_2
+  apptainer_image: ""
+
+salmon:
+  salmon_bin: salmon
+  libtype: A
+  kmer: 31
+  extra_args: ""
+  docker_image: quay.io/biocontainers/salmon:1.10.3--h6dccd9a_2
+  apptainer_image: ""
+
+edger:
+  pair: ""
+  cpm_cutoff: 1
+  min_samples: 1
+  adjust: BH
+  docker_image: quay.io/biocontainers/bioconductor-edger:4.4.2--r44h3b3f092_0
+  apptainer_image: ""
+
+quantifypolya:
+  max_gapwidth: 24
+  quant_mode: canonical
+  docker_image: ""
+  apptainer_image: ""

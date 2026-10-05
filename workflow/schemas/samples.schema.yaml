@@ -1,0 +1,19 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+description: sample sheet rows
+properties:
+  sample:
+    type: string
+  pod5:
+    type: string
+    description: POD5/FAST5 directory or file (pod5 entrypoint)
+  reads:
+    type: string
+    description: FASTQ for fastq entrypoint (or after Dorado)
+  bam:
+    type: string
+    description: aligned BAM for bam entrypoint
+  condition:
+    type: string
+    description: group label for edgeR
+required:
+  - sample

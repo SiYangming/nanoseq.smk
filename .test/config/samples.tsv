@@ -1,0 +1,3 @@
+sample	reads	condition
+A1	resources/A1.fastq.gz	A
+B1	resources/B1.fastq.gz	B

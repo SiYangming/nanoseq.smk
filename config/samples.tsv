@@ -1,0 +1,4 @@
+sample	reads	condition
+A1	A1.fastq.gz	A
+A2	A2.fastq.gz	A
+B1	B1.fastq.gz	B
