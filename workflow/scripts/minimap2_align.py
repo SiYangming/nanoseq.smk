@@ -1,6 +1,7 @@
 """Snakemake wrapper for minimap2 align (bioskills modules/minimap2)."""
 
 import os
+import subprocess
 import sys
 
 from snakemake.shell import shell
@@ -44,8 +45,15 @@ shell(
 )
 shell(f"{sam_prefix}{sam_bin} index {bam}{log}")
 
-mm2_ver = shell(f"{mm2_prefix}{mm2_bin} --version 2>/dev/null | head -n1", capture=True).strip()
-sam_ver = shell(f"{sam_prefix}{sam_bin} --version 2>/dev/null | head -n1", capture=True).strip()
+
+def _tool_version(cmd):
+    proc = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    text = (proc.stdout or proc.stderr or "").strip()
+    return text.splitlines()[0] if text else "unknown"
+
+
+mm2_ver = _tool_version(f"{mm2_prefix}{mm2_bin} --version")
+sam_ver = _tool_version(f"{sam_prefix}{sam_bin} --version")
 with open(snakemake.output.versions, "w") as vf:
     vf.write("minimap2_align:\n")
     vf.write(f"    minimap2: {mm2_ver}\n")
