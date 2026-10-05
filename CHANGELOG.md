@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.1.0] - 2026-10-05
+## [1.0.0] - 2026-10-05
 
 ### Added
 
@@ -9,3 +9,8 @@
   → gffcompare novel transcripts → salmon TPM → edgeR.
 - Poly(A) site clustering via QuantifyPolyA is optional (`run_polya`).
 - ORF / CDS prediction (TransDecoder, ORFfinder, ORFanage, TD2) is intentionally omitted.
+
+### Fixed
+
+- Snakemake lint/format, FLAIR conda pins, wrapper `__future__` imports, and CI `--all-temp` GTF retention.
+- FLAIR `--mm2_args` argparse, gffcompare `combined.gtf` delivery, and edgeR no-replicate dispersion.
