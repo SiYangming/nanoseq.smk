@@ -50,6 +50,10 @@ rule stringtie_gtf_list:
 rule stringtie_merge:
     input:
         gtf_list="results/stringtie/merge/gtf_list.txt",
+        gtfs=expand(
+            "results/stringtie/assemble/{sample}.stringtie.fixed.gtf",
+            sample=SAMPLE_IDS,
+        ),
     output:
         merged_gtf="results/stringtie/merge/stringtie_merged.gtf",
     log:
