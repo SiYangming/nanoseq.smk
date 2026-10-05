@@ -40,6 +40,7 @@ else:
 cpm_cutoff = snakemake.params.cpm_cutoff
 min_samples = snakemake.params.min_samples
 adjust = snakemake.params.adjust
+prior_dispersion = snakemake.params.get("prior_dispersion", 0.1)
 
 with tempfile.TemporaryDirectory() as tmp:
     counts_path = os.path.join(tmp, "counts.tsv")
@@ -65,7 +66,14 @@ y <- DGEList(counts=countData, group=group)
 keep <- rowSums(cpm(y) > {cpm_cutoff}) >= {min_samples}
 y <- y[keep, , keep.lib.sizes=FALSE]
 y <- calcNormFactors(y)
-y <- estimateDisp(y)
+if (any(tabulate(as.integer(group)) < 2L)) {{
+  y$common.dispersion <- {prior_dispersion}
+}} else {{
+  y <- estimateDisp(y)
+}}
+if (is.null(y$common.dispersion) || anyNA(y$common.dispersion)) {{
+  y$common.dispersion <- {prior_dispersion}
+}}
 et <- exactTest(y, pair=c("{ctrl}", "{treat}"))
 res <- topTags(et, n=Inf, adjust.method="{adjust}")
 write.table(res$table, "{snakemake.output.table}", sep="\\t", quote=FALSE, row.names=TRUE, col.names=NA)

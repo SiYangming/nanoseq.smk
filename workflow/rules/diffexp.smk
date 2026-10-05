@@ -28,5 +28,6 @@ rule edger_de:
         cpm_cutoff=config.get("edger", {}).get("cpm_cutoff", 1),
         min_samples=config.get("edger", {}).get("min_samples", 1),
         adjust=config.get("edger", {}).get("adjust", "BH"),
+        prior_dispersion=config.get("edger", {}).get("prior_dispersion", 0.1),
     script:
         "../scripts/run_edger.py"

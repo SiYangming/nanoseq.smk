@@ -77,6 +77,7 @@ edger:
   cpm_cutoff: 1
   min_samples: 1
   adjust: BH
+  prior_dispersion: 0.1
   docker_image: quay.io/biocontainers/bioconductor-edger:4.4.2--r44h3b3f092_0
   apptainer_image: ""
 
