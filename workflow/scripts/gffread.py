@@ -1,7 +1,5 @@
 """gffread transcripts FASTA from merged GTF."""
 
-from __future__ import annotations
-
 import os
 import sys
 

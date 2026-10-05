@@ -1,7 +1,5 @@
 """salmon quant single-end (bioskills modules/salmon; DRS)."""
 
-from __future__ import annotations
-
 import os
 import sys
 

@@ -1,7 +1,5 @@
 """FLAIR identify_gene_isoform (bioskills modules/flair)."""
 
-from __future__ import annotations
-
 import os
 import sys
 

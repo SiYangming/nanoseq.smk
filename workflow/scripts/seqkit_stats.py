@@ -1,7 +1,5 @@
 """seqkit stats wrapper (bioskills modules/seqkit)."""
 
-from __future__ import annotations
-
 import os
 import sys
 

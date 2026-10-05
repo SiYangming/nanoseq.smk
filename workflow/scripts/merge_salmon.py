@@ -1,7 +1,5 @@
 """Merge salmon quant.sf into count and TPM matrices."""
 
-from __future__ import annotations
-
 import csv
 from pathlib import Path
 
@@ -23,14 +21,12 @@ for sample, path in zip(samples, snakemake.input.quants):
 
 Path(snakemake.output.counts).parent.mkdir(parents=True, exist_ok=True)
 
-
 def write_matrix(path, data):
     with open(path, "w", newline="") as fh:
         writer = csv.writer(fh, delimiter="\t")
         writer.writerow(["transcript", *samples])
         for name in names:
             writer.writerow([name, *[data[name].get(s, "0") for s in samples]])
-
 
 write_matrix(snakemake.output.counts, count_map)
 write_matrix(snakemake.output.tpm, tpm_map)

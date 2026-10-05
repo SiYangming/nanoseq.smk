@@ -1,7 +1,5 @@
 """seqkit quality filter Q >= min_q (Benagen DRS pass reads)."""
 
-from __future__ import annotations
-
 import os
 import sys
 

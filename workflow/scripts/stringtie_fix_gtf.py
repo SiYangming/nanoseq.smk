@@ -1,7 +1,5 @@
 """GTF coordinate fix $4<=$5 (bioskills modules/stringtie)."""
 
-from __future__ import annotations
-
 from pathlib import Path
 
 from snakemake.shell import shell

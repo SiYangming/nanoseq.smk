@@ -1,7 +1,5 @@
 """edgeR DE from salmon counts (bioskills modules/edger)."""
 
-from __future__ import annotations
-
 import csv
 import os
 import sys

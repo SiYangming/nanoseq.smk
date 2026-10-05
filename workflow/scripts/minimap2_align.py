@@ -1,7 +1,5 @@
 """Snakemake wrapper for minimap2 align (bioskills modules/minimap2)."""
 
-from __future__ import annotations
-
 import os
 import sys
 

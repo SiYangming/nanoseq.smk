@@ -1,7 +1,5 @@
 """Extract poly(A) tag BED from BAM (3' alignment end)."""
 
-from __future__ import annotations
-
 import os
 import re
 import subprocess
@@ -13,14 +11,12 @@ import docker_wrapper  # noqa: E402
 CONSUME_REF = set("MDN=X")
 CIGAR_RE = re.compile(r"(\d+)([MIDNSHP=X])")
 
-
 def align_end(pos, cigar):
     end = pos
     for length, op in CIGAR_RE.findall(cigar):
         if op in CONSUME_REF:
             end += int(length)
     return end
-
 
 sam_prefix, sam_bin = docker_wrapper.docker_wrapper_binary(
     snakemake.config, "minimap2", "samtools_bin", "samtools"

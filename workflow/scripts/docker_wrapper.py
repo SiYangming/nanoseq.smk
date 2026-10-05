@@ -8,7 +8,6 @@ __license__ = "MIT"
 
 VALID_MODES = ("native", "conda", "docker", "apptainer")
 
-
 def build_docker_command(image, volumes, workdir, cmd, platform="linux/amd64"):
     """Return argv for docker run (used by unit tests and optional callers)."""
     argv = [
@@ -28,7 +27,6 @@ def build_docker_command(image, volumes, workdir, cmd, platform="linux/amd64"):
     argv.extend(list(cmd))
     return argv
 
-
 def build_apptainer_command(image, bind, workdir, cmd):
     """Return argv for apptainer exec."""
     argv = [
@@ -43,7 +41,6 @@ def build_apptainer_command(image, bind, workdir, cmd):
     argv.extend(list(cmd))
     return argv
 
-
 def docker_run(exec_mode, platform="linux/amd64"):
     if exec_mode == "docker":
         return (
@@ -54,13 +51,11 @@ def docker_run(exec_mode, platform="linux/amd64"):
         return "apptainer exec --bind $(pwd):$(pwd) --pwd $(pwd) "
     return ""
 
-
 def _tool_cfg(config, tool_name):
     cfg = config.get(tool_name)
     if not isinstance(cfg, dict):
         raise ValueError(f"Missing tool config section: {tool_name}")
     return cfg
-
 
 def docker_wrapper_binary(config, tool_name, bin_key, default_bin):
     exec_mode = config.get("exec_mode", "conda")
