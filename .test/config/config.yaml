@@ -7,6 +7,15 @@ fasta: resources/tiny.fa
 gtf: resources/tiny.gtf
 run_polya: false
 run_edger: true
+run_fastp: true
+
+fastp:
+  fastp_bin: fastp
+  extra: "--disable_adapter_trimming"
+  length_required: 1
+  qualified_quality_phred: 5
+  docker_image: ""
+  apptainer_image: ""
 
 dorado:
   model: rna004_130bps_sup@v5.1.0

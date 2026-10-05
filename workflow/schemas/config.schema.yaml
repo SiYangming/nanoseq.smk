@@ -24,6 +24,8 @@ properties:
     type: boolean
   run_edger:
     type: boolean
+  run_fastp:
+    type: boolean
 additionalProperties: true
 required:
   - exec_mode

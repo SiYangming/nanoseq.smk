@@ -7,6 +7,15 @@ fasta: genome.fa
 gtf: annotation.gtf
 run_polya: false
 run_edger: true
+run_fastp: true
+
+fastp:
+  fastp_bin: fastp
+  extra: "--disable_adapter_trimming"
+  length_required: 50
+  qualified_quality_phred: 5
+  docker_image: quay.io/biocontainers/fastp:0.24.0--heae3180_1
+  apptainer_image: ""
 
 dorado:
   model: rna004_130bps_sup@v5.1.0

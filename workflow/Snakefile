@@ -2,6 +2,7 @@ configfile: "config/config.yaml"
 
 
 include: "rules/common.smk"
+include: "rules/fastp.smk"
 include: "rules/qc.smk"
 include: "rules/dorado.smk"
 include: "rules/align.smk"
