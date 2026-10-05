@@ -51,6 +51,16 @@ def raw_reads(wildcards):
     return reads
 
 
+def run_fastp():
+    return bool(config.get("run_fastp", True)) and ENTRY != "bam"
+
+
+def post_fastp_reads(wildcards):
+    if run_fastp():
+        return f"results/qc/{wildcards.sample}/{wildcards.sample}.fastp.fastq.gz"
+    return raw_reads(wildcards)
+
+
 def clean_reads(wildcards):
     if ENTRY == "bam":
         reads = sample_reads(wildcards.sample)
@@ -82,7 +92,13 @@ def has_conditions():
 
 
 def pipeline_targets():
-    targets = expand("results/qc/{sample}/{sample}.seqkit.stats.tsv", sample=SAMPLE_IDS)
+    targets = []
+    if run_fastp():
+        targets += expand("results/qc/{sample}/{sample}.fastp.html", sample=SAMPLE_IDS)
+        targets += expand("results/qc/{sample}/{sample}.fastp.json", sample=SAMPLE_IDS)
+    targets += expand(
+        "results/qc/{sample}/{sample}.seqkit.stats.tsv", sample=SAMPLE_IDS
+    )
     targets += expand("results/align/{sample}/{sample}.flagstat.txt", sample=SAMPLE_IDS)
     targets += expand(
         "results/flair/{sample}/{sample}.flair.collapse.fasta", sample=SAMPLE_IDS

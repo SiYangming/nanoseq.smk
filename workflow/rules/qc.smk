@@ -1,6 +1,6 @@
 rule seqkit_stats:
     input:
-        reads=lambda wc: raw_reads(wc) if ENTRY != "bam" else clean_reads(wc),
+        reads=lambda wc: post_fastp_reads(wc) if ENTRY != "bam" else clean_reads(wc),
     output:
         tsv="results/qc/{sample}/{sample}.seqkit.stats.tsv",
     log:
@@ -14,7 +14,7 @@ rule seqkit_stats:
 
 rule seqkit_qfilter:
     input:
-        reads=raw_reads,
+        reads=post_fastp_reads,
     output:
         fastq="results/qc/{sample}/{sample}.q{qscore}.fastq.gz",
     log:

@@ -10,17 +10,20 @@ assembled from [bioskills](https://github.com/SiYangming/bioskills) module wrapp
 ## Pipeline
 
 1. Optional Dorado basecall (`pod5`/`fast5`, `--estimate-poly-a`)
-2. Pass reads Q ≥ 10 (`seqkit seq -Q 10`)
-3. Align: `minimap2 -ax splice -uf -k14` + `samtools flagstat`
-4. Consensus isoforms: FLAIR `bam2bed12` → `identify_gene_isoform` → `collapse`
-5. Reconstruct / collapse: StringTie `--conservative -L -R` then `--merge`
-6. Novel transcripts: `gffcompare -R -C -K -M` (no ORF/CDS prediction)
-7. Quantify: salmon TPM
-8. Differential expression: edgeR (when `condition` is in the sample sheet)
-9. Optional poly(A) sites: BAM 3′ ends → QuantifyPolyA (`run_polya: true`)
+2. `fastp` SE QC (`run_fastp`, default on; adapter trim off for ONT)
+3. Pass reads Q ≥ 10 (`seqkit seq -Q 10`)
+4. Align: `minimap2 -ax splice -uf -k14` + `samtools flagstat`
+5. Consensus isoforms: FLAIR `bam2bed12` → `identify_gene_isoform` → `collapse`
+6. Reconstruct / collapse: StringTie `--conservative -L -R` then `--merge`
+7. Novel transcripts: `gffcompare -R -C -K -M` (no ORF/CDS prediction)
+8. Quantify: salmon TPM
+9. Differential expression: edgeR (when `condition` is in the sample sheet)
+10. Optional poly(A) sites: BAM 3′ ends → QuantifyPolyA (`run_polya: true`)
 
 ORF-related steps are **not** included: TransDecoder, ORFfinder, ORFanage, TD2,
 and protein-level diamond/hmmscan annotation that depends on predicted CDS.
+
+Illumina `fastp` PE rules remain at `workflow/rules/fastp_pe.smk` (not in the DRS DAG).
 
 Not yet wrapped from bioskills (report mentions them): AGAT UTR extension, SUPPA2,
 FusionSeeker, CNCI/CPC2/PLEK lncRNA, Dorado/modkit m6A, clusterProfiler/GSEA.
