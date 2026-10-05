@@ -8,6 +8,13 @@
   `workflow/rules/fastp.smk` SE is **in the DRS DAG**: raw FASTQ → fastp → seqkit Q-filter).
   Disable with `run_fastp: false`. Default extra `--disable_adapter_trimming` (ONT DRS).
 
+## [1.1.0](https://github.com/SiYangming/nanoseq.smk/compare/v1.0.0...v1.1.0) (2026-10-05)
+
+
+### Features
+
+* add fastp SE QC to the DRS DAG ([4154d0e](https://github.com/SiYangming/nanoseq.smk/commit/4154d0e23dcf7ce8ec50b4cc225f9943cf93c702))
+
 ## [1.0.0] - 2026-10-05
 
 ### Added
